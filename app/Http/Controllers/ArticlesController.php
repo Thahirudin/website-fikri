@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticlesController extends Controller
 {
-    public function index()
-    {
-        $articles = Article::with('category', 'author')->orderBy('created_at', 'desc')->get();
-        return view('article.index', compact('articles'));
-    }
     public function create()
     {
         $categories = Categories::all();
@@ -50,6 +45,17 @@ class ArticlesController extends Controller
             return redirect()->back()->withInput()->with('error', 'Error: ' . $e->getMessage());
         }
     }
+    public function index()
+    {
+        $articles = Article::with('category', 'author')->orderBy('created_at', 'desc')->get();
+        return view('article.index', compact('articles'));
+    }
+    public function view($url)
+    {
+        $article = Article::with('category', 'author')->where('url', $url)->first();
+        return view('article.view', compact('article'));
+    }
+    
     public function edit($id)
     {
         $categories = Categories::all();
@@ -57,11 +63,7 @@ class ArticlesController extends Controller
         $selectedCategoryId = $article->id;
         return view('article.edit', compact('article', 'categories', 'selectedCategoryId'));
     }
-    public function view($url)
-    {
-        $article = Article::with('category', 'author')->where('url', $url)->first();
-        return view('article.view', compact('article'));
-    }
+    
     public function update(Request $request, $id)
     {
         // Validasi formulir

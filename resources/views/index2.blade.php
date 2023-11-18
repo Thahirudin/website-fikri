@@ -8,7 +8,7 @@
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Article</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Articles</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalarticles }}</div>
                     </div>
                     <div class="col-auto">
